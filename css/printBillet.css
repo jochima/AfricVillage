@@ -1,0 +1,24 @@
+body{
+    font-size: 10px;
+}
+#impression{
+    display: none;
+}
+#impression2{
+    display: none;
+}
+#dvContainer{
+    margin-top: 0px;
+}
+header{
+    display: none;
+}
+#fbl{
+    display: none;
+}
+.fbl{
+    display: none;
+}
+#watermark{
+    display: none;
+}

@@ -1,0 +1,45 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.conteiner_navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #344BAB;
+    padding:5px
+}
+.navbar_items{
+    list-style:none ;
+    float: left;
+    padding:  0 5px;
+}
+.button_nav{
+    background: white;
+    color:#344BAB;
+    border: 1 px solid white;
+    height: 30px;
+    width: 90px;
+    border-radius: 5px;
+}
+.conteiner_body{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        height: 500px;
+}
+.dsession{
+    border:1px solid red;
+    width:40vw
+}
+.images_bg{
+    width: 50vw;
+    height: 400px;
+}
+.cont
+{
+     display: table;
+     position: absolute;
+     height: 100%;
+     width: 100%;
+}

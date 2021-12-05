@@ -1,0 +1,21 @@
+.item_input{
+    width: 95%;
+    height: 50px;
+    margin: 5px;
+    border-radius: 5px;
+    border:2px solid  #344BAB;
+    outline: none;
+    padding-left: 15px;
+}
+.data-send{
+    width: 95%;
+    height: 50px;
+    background-color: #344BAB;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    border:1px solid #344BAB;
+}
+.checkpassword{
+    margin-left: 5px;
+}

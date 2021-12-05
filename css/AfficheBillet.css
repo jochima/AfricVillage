@@ -1,0 +1,196 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    margin: 2em;
+    width: 100%;
+    text-transform:uppercase;
+ }
+ #dvContainer{
+    margin-top: 100px;
+ }
+ .div2{
+     margin-left: 370px;
+     height: 40px;
+ }
+ .container{
+     margin-top: 30px;
+ }
+ .contain{
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     margin: 10px;
+     height: 10px;
+ }
+ .contain2{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     font-size: 20px;
+ }
+ .div3{
+     margin-left: 400px;
+ }
+ .contain3{
+     display: flex;
+     flex-direction: row;
+     
+     margin: 10px;
+     height: 15px;
+ }
+ .contain4{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contain5{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contai{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contain6{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     margin-top: 20px;
+     width: 100%;
+ }
+ .contain7{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     width: 100%;
+ }
+ .contain8{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     width: 100%;
+ }
+ .contain9{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     width: 100%;
+ }
+ .contain10{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contain11{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     width: 100%;
+ }
+ .contain12{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contain13{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contain14{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+ }
+ .contain15{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     margin-top: 20px;
+     width: 100%;
+ }
+ .contain16{
+     display: flex;
+     flex-direction: row;
+     margin: 10px;
+     height: 15px;
+     width: 100%;
+ }
+ .div4{
+     margin-left: 350px;
+ }
+ .div6{
+         margin-left: 300px;
+ }
+ .div8{
+     margin-left: 300px;
+ }
+ .div9{
+     margin-left: 156px;
+ }
+ .div11{
+     margin-left: 160px;
+ }
+ .div13{
+     margin-left: 250px;
+ }
+ .div14{
+     margin-left: 272px;
+ }
+ .div15{
+     margin-left: 300px;
+ }
+ .Fbooking{
+     margin-left: 100px;
+ }
+ .Freserv{
+     margin-left: 100px;
+ }
+ .oby{
+     margin-left: 100px;
+ 
+ }
+ .equip{
+     margin-left: 100px;
+ }
+ .divN{
+     margin-left: 100px;
+ }
+ .divY{
+     margin-left: 327px;
+ }
+ #impression{
+     height: 50px;
+     margin-left: 30em;
+     width: 300px;
+     margin-top: 50px;
+     cursor: pointer;
+      background-color: #344BAB;
+     font-family: poppins;
+     color: aliceblue;
+     border-radius: 10px;
+     border: 1px solid #344BAB;
+
+
+  }
+  .boutton{
+                    background-color:#04AA6D !important;
+                    color:white;
+                    border: 1px solid  #04AA6D !important;
+  }
+ 

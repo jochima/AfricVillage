@@ -1,0 +1,67 @@
+body{
+    padding:0;
+    margin:0;
+}
+
+*{
+    box-sizing: border-box;
+}
+.container {
+    padding: 16px;
+    background-color: white;
+
+  }
+  
+  /* Full-width input fields */
+  input[type=text], input[type=password],input[type=date] {
+    width: 80%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    margin-left: 8%;
+    border-radius: 5px;
+  }
+  
+  
+  input[type=text]:focus, input[type=password],input[type=date]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+    width: 80%;
+  }
+  
+  /* Set a style for the submit button */
+  .registerbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    opacity: 0.9;
+    margin-left: 8%;
+    border-radius: 5px;
+  }
+  .label{
+    margin-left: 8%;
+  }
+  .registerbtn:hover {
+    opacity: 1;
+  }
+  .form{
+      position: absolute;
+      margin-top: 70px;
+      width: 100%;
+  }
+  .checkpassword{
+
+    margin-left: 8%;
+}
