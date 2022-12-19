@@ -24,8 +24,9 @@
                                                             <th>Numero</th>
                                                             <th>Login</th>
                                                             <th>Role</th>
+                                                            <th>Justifs enregistré</th>
                                                             <th>Date Creation</th>
-                                                            <th>Operations</th>
+                                                            <th>Options</th>
                                                         </tr>
                                                     <?php  
                                                     $data = $m->afficherUtilisateur($dbconn);
@@ -35,6 +36,15 @@
                                                             <td><?= $key?></td>
                                                             <td><?= $row['login']?></td>
                                                             <td><?= $row['role']?></td>
+                                                            <td>
+                                                                <?php
+                                                                 $ses = new Session; $idu = $row['idUtilisateur'];
+                                                                $tj = $ses->totalJustifParManager($dbconn,intval($idu));
+                                                                echo $tj;
+                                                                
+                                                                 
+                                                                 ?>
+                                                            </td>
                                                             <td><?= $row['createdAt']?></td>
                                                             <td>
                                                                     <div class="items_th">

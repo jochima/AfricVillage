@@ -53,7 +53,7 @@ if (isset($_POST['updateUser'])) {
 
                                                 <label class="label" for="psw"><b>Mot de passe</b></label><br>
                                                 <input type="password"id="myInput2"  placeholder="Verifier le mot de passe !" name="rpwd" id="psw" required><br>
-                                                <input  class="checkpassword" onclick="myFunction()" type="checkbox" onclick >show password
+                                                <input  class="checkpassword" onclick="myFunction()" type="checkbox" onclick >Voir le mot de passe
 
                                                 <hr>
 

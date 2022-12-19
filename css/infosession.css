@@ -1,0 +1,22 @@
+body{
+    padding:0;
+    margin: 0;
+}
+.name_session{
+    text-align: center;
+}
+.action{
+    background-color:#344BAB;
+    border:1px solid #344BAB;
+    color:white;
+    margin-right: 45%;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 5px;
+
+}
+.action:hover{
+    background-color: #04AA6D !important; 
+    border:1px solid #04AA6D !important;
+    transition: ease 0.2s !important;
+}

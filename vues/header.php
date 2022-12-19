@@ -3,10 +3,9 @@
             <nav class="navbar">
                 <div class="container">
                     <div class="navbar-brand">
-                        <a class="navbar-item" href="../">
-                            <!-- <img src="http://bulma.io/images/bulma-type-white.png" alt="Logo"> -->
-                            CeeMo*
-                        </a>
+                      <ul>
+                            <li class="name_logiciel">NCK</li>
+                      </ul>
                         <span class="navbar-burger burger" data-target="navbarMenu">
                             <span></span>
                             <span></span>
@@ -15,25 +14,20 @@
                     </div>
                     <div id="navbarMenu" class="navbar-menu">
                         <div class="navbar-end">
-                            <span class="navbar-item">
-                                <a class="button is-white is-outlined" href="#">
-                                    <span class="icon">
-                                        
-                                    </span>
-                                    <span>Home</span>
-                                </a>
-                            </span>
-                            <span class="navbar-item">
-                                <a class="button is-white is-outlined" href="#">
-                                    <span class="icon">
-                                    
-                                    </span>
-                                    <span>Documents</span>
-                                </a>
-                            </span>
+                          
+                         
                           
                          
                         </div>
+                        <div class="items" style="margin-top:5px">
+                                    <?php 
+                                     include ("dropdown3.php");
+                                       
+                                     ?>
+                                            <!-- <label for="suivi" style=" font-family: poppins; color: white;">Nom et prenom</label>
+                                            <input type="text" class="suivi" value="" id="in" placeholder="Entrer le nom et le prenom"> -->
+
+                            </div>
                     </div>
                 </div>
             </nav>

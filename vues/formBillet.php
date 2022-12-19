@@ -57,6 +57,14 @@ select{
   background: #f1f1f1;
   border-radius:20px
 }
+.form-container input[type=text], .form-container input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  border-radius:20px
+}
 .dateemission{
    width: 100%;
   padding: 15px;
@@ -134,6 +142,8 @@ select{
     <div class="autocomplete" style="width:270px;"><input type="text" id="searchField"placeholder="Entrer la profession" name="profession" required></div>
     <label for="matricule"><b>Matricule</b></label>
     <input type="text" placeholder="Entrer Matricule" name="matricule" required>
+    <label for="matricule"><b>Prix du billet</b></label>
+    <input type="number" placeholder="Entrer le prix du billet" name="prixbillet" required>
     <label for="dateEmission"><b>Date Emission passport</b></label>
     <input type="date" class="dateemission"name="dateEmission" required></b> <br><br>
     <label for="paysEmission"><b>Pays d'émission du passport</b></label>

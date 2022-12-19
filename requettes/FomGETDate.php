@@ -1,6 +1,6 @@
 
             <?php
-                            $bdd=  new PDO ('mysql:host=localhost;dbname=cisse;','kingni','pantouro');
+                            $bdd=  new PDO ('mysql:host=localhost;dbname=ceo;','root','');
 
                                 if( isset($_POST['pays']) && !empty($_POST['pays']) 
                                 &&

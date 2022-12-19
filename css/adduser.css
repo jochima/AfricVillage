@@ -13,7 +13,7 @@ body{
   }
   
   /* Full-width input fields */
-  input[type=text], input[type=password],input[type=date] {
+  input[type=text], input[type=password],input[type=date],input[type="number"] {
     width: 80%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -24,7 +24,9 @@ body{
     border-radius: 5px;
   }
   
-  
+  .input[type="number"]{
+    outline: none !important;
+  }
   input[type=text]:focus, input[type=password],input[type=date]:focus {
     background-color: #ddd;
     outline: none;
@@ -64,4 +66,10 @@ body{
   .checkpassword{
 
     margin-left: 8%;
+}
+.registerbtn:hover{
+  background-color:#344BAB;
+  border:1px solid #344BAB;
+  transition: ease 0.2s;
+
 }

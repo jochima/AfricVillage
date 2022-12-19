@@ -17,7 +17,9 @@
         ?>
             <div class="conteiner_header">
                         <div class="conteiner_header_items">
-                            
+                                    <ul>
+                                        <li class="name_logiciel">NCK</li>
+                                    </ul>
                         </div>
                         <div class="conteiner_header_items">      
                                   <div class="dropdown">
@@ -27,6 +29,8 @@
                                                     <a href="session.php">Creer session</a>
                                                     <a href="listuser.php">Liste utilisateur</a>
                                                     <a href="listsession.php">Liste session</a>
+
+                                                    <a href="dashboard.php">Home</a>
                                                     <form action="" method="POST">
                                                          <button class="deconnexion" name="deconnexion">Deconnexion</button>
                                                     </form>
@@ -45,5 +49,4 @@
                                     header('Location: ../../index.php');
                                 }
                                 ?>  
-</body>
-</html>
+ 

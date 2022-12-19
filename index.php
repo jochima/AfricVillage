@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CeeMo </title>
+    <title>NKC HOME </title>
     <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="index.css">
     <!-- Bulma Version 0.9.0-->
@@ -114,6 +114,12 @@
                                     <a  id="myBtn" class="button is-info"style="width: 100%; font-family:poppins; font-size: 20px" >    
                                      Bienvenue
                                     </a>
+                                    <?php
+                                    if (isset($_SESSION['msg'])) {
+                                        echo $_SESSION['msg'];
+                                        unset($_SESSION['msg']);
+                                    }
+                                    ?>
                                 
                             </div>
                         </div>

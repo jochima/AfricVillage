@@ -1,17 +1,13 @@
 <?php 
 //___Connection a la base de donnee
- 
-            session_start(); 
-
+session_start(); 
 $dbconn = new PDO('mysql:host=localhost;dbname=ceo','root',''); 
-
 interface Services
 {
     public function ajouterEnregistrement($dbconn, $idMandataire);
     public function ajouterMandataire($dbconn,$matricule, $nomMandataire, $profession,$statut,$dateEmission);
     public function ajouterTransaction($dbconn, $idMandataire, $paysEmission, $origineFonds,$dateEmission);
     public function ajouterBillet($dbconn, $idMandataire, $depart, $arrive, $destination);
-
     public function getMandataireById($dbconn, $matricule);
     public function supprimerEnregistrement($dbconn, $session, $idMandataire,$montant);
 } 
@@ -32,15 +28,37 @@ interface User
 
 
 
+
 interface Administration
 {
+    //___Session manage part
     public function ajouterSession($dbconn,$dateDeCreation, $limite,$intitule);
     public function supprimerSession($dbconn, $nomSession);
     public function modifierSession($dbconn, $idSession,$titre,$dateDeCreation,$limite);
+    //public function activerSession($dbconn, $idSession);//__
 
+    //___User manage part
     public function ajouterUtilisateur($dbconn, $login, $motDePasse);
     public function supprimerUtilisateur($dbconn,$idUser);
     public function modifierUtilisateur($dbconn, $idUser, $login, $motDePasse); 
+    
+    //___Dashbord
+    //public function countManager();//__
+    //public function CountSessions();//__
+    //public function countJustif();//__
+}
+
+
+
+interface justif
+{
+    public function totalJustifParManager($dbconn, $idUser);
+    public function totalJustif($dbconn);
+    public function justifRedigePar($dbconn, $idManager); 
+    public function totalJustifParManagerSession($dbconn, $nomSession);
+
+    public function activerSession($dbconn, $idSession);
+
 }
 
 
@@ -49,6 +67,126 @@ interface Administration
 
 
 
+
+
+class Session implements Justif
+{
+    /**
+     * [totalJustifParManager RETOURNE LE NOMBRE TOTAL D'ENREGISTREMENT PAR UTILISATEUR]
+     * @param  [PDO] $dbconn [description]
+     * @param  [int] $idUser [identifiant du manager]
+     * @return [int]         [description]
+     */
+    public function totalJustifParManager($dbconn, $idUser)
+    {
+        $req = 'SELECT * FROM billet WHERE idUtilisateur='.$idUser;
+        $stmt = $dbconn->query($req);
+        $count = $stmt->rowcount();
+        return intval($count);
+    }
+    /**
+     * [totalJustif RETOURNE LE NOMBRE TOTAL D'ENREGISTREMENT DANS LE SYSTEME]
+     * @param  [PDO] $dbconn [-]
+     * @return [int]         [nombre d'enregistrement]
+     */
+    public function totalJustif($dbconn)
+    {
+        $req = 'SELECT * FROM enregistrement';
+        $stmt = $dbconn->query($req);
+        $count = $stmt->rowcount();
+
+        return intval($count);
+    }
+    /**
+     * [justifRedigePar RETOURNE LE NOM DE L'UTILISATEUR QUI A ENREGISTRE LE BILLET]
+     * @param  [pdo] $dbconn [-]
+     * @param  [int] $idUser [identifiant du manager]
+     * @return [string]         [nom d'un manager]
+     */
+    public  function justifRedigePar($dbconn, $idUser){
+        $req = 'SELECT login FROM utilisateur WHERE idUtilisateur='.$idUser;
+        $stmt = $dbconn->query($req);
+        $find = $stmt->fetch();
+        return $find['login']; 
+    }
+    /**
+     * [totalJustifParManagerSession RETOURNE LE NOMBRE TOTAL DE JUSTIF PAR SESSION]
+     * @param  [pdo] $dbconn    [-]
+     * @param  [int] $idSession [identifiant de la session]
+     * @return [int]            [nombre de justif de la session passe en parametre]
+     */
+    public function totalJustifParManagerSession($dbconn, $idSession)
+    {
+        $req = 'SELECT COUNT(*) FROM enregistrement WHERE idSession="'.$idSession.'"';
+        $stmt = $dbconn->query($req);
+        $count = $stmt->fetch();  
+
+        return $count[0];
+    }
+    /**
+     * [getStatut RETOURNE L'ETAT D'UNE SESSION(0 ou 1)]
+     * @param  [type] $dbconn    [-]
+     * @param  [int or string] $idSession [identifiant de la session ou nom de la session]
+     * @return [string or int]            [le statut de la session]
+     */
+    public function getStatut($dbconn,$idSession){
+        if (is_int($idSession)) {
+            $req = 'SELECT statut FROM session WHERE idSession='.$idSession;
+            $find = $dbconn->query($req)->fetch();
+            
+            if (is_array($find) && !empty($find)) {
+                return intval($find[0]);
+            }
+            else {
+                return 'ERROR : getStatut($,$int)';
+            }
+        }
+        elseif (is_string($idSession)) {
+            $req = 'SELECT statut FROM session WHERE nomSession="'.$idSession.'"';
+            $find = $dbconn->query($req)->fetch();
+            
+            if ($find) {
+                return intval($find[0]);
+            }
+            else {
+                return 'ERROR : getStatut($,$str)';
+            }
+        }
+    }
+/**
+ * [activerSession ACTIVE OU DESACTIVE UNE SESSION]
+ * @param  [pdo] $dbconn    [-]
+ * @param  [int] $idSession [identifiant de la session]
+ * @return [bool ou string]            [confirmation]
+ */
+    public function activerSession($dbconn, $idSession)
+    {
+        $statut = 0;
+        $idSession = intval($idSession);
+        $etat = $this->getStatut($dbconn,$idSession);
+        
+        if($etat == 0)
+        {
+            $statut = 1;
+        }
+
+        $req = 'UPDATE session SET statut='.$statut.' WHERE idSession='.$idSession;
+        $stmt = $dbconn->query($req);
+        if ($stmt) {
+            return true;
+        }
+        else{
+            if ($etat) {
+                $_SESSION['msg'] = 'une erreur s\'est produit durant la désactivation !!!';
+            }
+            else{
+                $_SESSION['msg'] =  'une erreur s\'est produit durant l\'activation !!!';
+            }
+        }
+        
+    }
+
+}
 
 
 
@@ -200,78 +338,96 @@ class Manager implements Services
      * @var $dateEmission(date) : date d'emission du passport
      * @return string : messages
      */
-    public function effectuerEnregistrement($dbconn,$matricule,$nomMandataire,$profession,$statut,$depart,$arrive,$destination,$paysEmission,$origineFonds,$dateEmission){
-        //___Si le mandataire est enregistré dans cette session avec le meme matricule
-        $mandataire = $this->getMandataireById($dbconn, $matricule);
-        if (empty($mandataire)) {
-            /**
-             * verification du nombre limite des billets
-             */
-            $req = "SELECT limite FROM session WHERE nomSession='".$_SESSION['sessionName']."'";
-            $stmt = $dbconn->query($req);//___execution de la requete
-            $limite = $stmt->fetch();//___recuperation du nombre limite(string)
-            $limite = $limite['limite']; //___recuperation int
-            $limite = intval($limite); //___convertion, string vers int
-            //___si la limite est superieur a 0
-            if ($limite > $_SESSION['limite'] || $limite >= $_SESSION['limite']) { //___si le quota est supperieur ou egale au montant definit par l'operateur
+    public function effectuerEnregistrement($dbconn,$matricule,$nomMandataire,$profession,$statut,$depart,$arrive,$destination,$paysEmission,$origineFonds,$dateEmission)
+    {
+        $session = new Session;
+        $statut = $session->getStatut($dbconn, $_SESSION['sessionName']);
+        if (is_int($statut) && $statut == 1 ) 
+        {
+               //___Si le mandataire est enregistré dans cette session avec le meme matricule
+            $mandataire = $this->getMandataireById($dbconn, $matricule);
+            if (empty($mandataire)) 
+            {
                 /**
-                 * Ajout du mandataire
+                 * verification du nombre limite des billets
                  */
-                $idMandataire = $this->ajouterMandataire($dbconn, $matricule, $nomMandataire, $profession,$statut,$dateEmission);
-                /**
-                 * Ajout de la transaction
-                 */
-                $this->ajouterTransaction($dbconn, $idMandataire, $paysEmission, $origineFonds,$dateEmission);
-                /**
-                 * Ajout du billet
-                 */
-                $this->ajouterBillet($dbconn, $idMandataire, $depart, $arrive, $destination);
-                /**
-                 * Ajout de l'enregistrement
-                 */
-                $this->ajouterEnregistrement($dbconn,$idMandataire);  
-                /**
-                 * Decrementation de la limite
-                 */
-                $limite = $limite-($_SESSION['limite']); //___decrementation et mise a jour
-                $req = "UPDATE session SET limite=".$limite." WHERE nomSession='".$_SESSION['sessionName']."'";
-                $dbconn->query($req);
+                $req = "SELECT limite FROM session WHERE nomSession='".$_SESSION['sessionName']."'";
+                $stmt = $dbconn->query($req);//___execution de la requete
+                $limite = $stmt->fetch();//___recuperation du nombre limite(string)
+                $limite = $limite['limite']; //___recuperation int
+                $limite = intval($limite); //___convertion, string vers int
+                //___si la limite est superieur a 0
+                if ($limite > $_SESSION['limite'] || $limite >= $_SESSION['limite']) 
+                { //___si le quota est supperieur ou egale au montant definit par l'operateur
+                    /**
+                     * Ajout du mandataire
+                     */
+                    $idMandataire = $this->ajouterMandataire($dbconn, $matricule, $nomMandataire, $profession,$statut,$dateEmission);
+                    /**
+                     * Ajout de la transaction
+                     */
+                    $this->ajouterTransaction($dbconn, $idMandataire, $paysEmission, $origineFonds,$dateEmission);
+                    /**
+                     * Ajout du billet
+                     */
+                    $this->ajouterBillet($dbconn, $idMandataire, $depart, $arrive, $destination);
+                    /**
+                     * Ajout de l'enregistrement
+                     */
+                    $this->ajouterEnregistrement($dbconn,$idMandataire);  
+                    /**
+                     * Decrementation de la limite
+                     */
+                    $limite = $limite-($_SESSION['limite']); //___decrementation et mise a jour
+                    $req = "UPDATE session SET limite=".$limite." WHERE nomSession='".$_SESSION['sessionName']."'";
+                    $dbconn->query($req);
 
-                return true;
-            }
-            elseif($limite!=0 && $limite<$_SESSION['limite']){//__si le quota qui reste est iniferieur au montant definit par l'operateur
-                $_SESSION['limite'] = $limite;
-             /**
-                 * Ajout du mandataire
-                 */
-                $idMandataire = $this->ajouterMandataire($dbconn, $matricule, $nomMandataire, $profession,$statut,$dateEmission);
-                /**
-                 * Ajout de la transaction
-                 */
-                $this->ajouterTransaction($dbconn, $idMandataire, $paysEmission, $origineFonds,$dateEmission);
-                /**
-                 * Ajout du billet
-                 */
-                $this->ajouterBillet($dbconn, $idMandataire, $depart, $arrive, $destination);
-                /**
-                 * Ajout de l'enregistrement
-                 */
-                $this->ajouterEnregistrement($dbconn,$idMandataire);  
-                /**
-                 * Annulation de la limite
-                 */
-                $limite = 0;
+                    return true;
+                }
+                elseif($limite!=0 && $limite<$_SESSION['limite'])
+                {//__si le quota qui reste est iniferieur au montant definit par l'operateur
+                    $_SESSION['limite'] = $limite;
+                 /**
+                     * Ajout du mandataire
+                     */
+                    $idMandataire = $this->ajouterMandataire($dbconn, $matricule, $nomMandataire, $profession,$statut,$dateEmission);
+                    /**
+                     * Ajout de la transaction
+                     */
+                    $this->ajouterTransaction($dbconn, $idMandataire, $paysEmission, $origineFonds,$dateEmission);
+                    /**
+                     * Ajout du billet
+                     */
+                    $this->ajouterBillet($dbconn, $idMandataire, $depart, $arrive, $destination);
+                    /**
+                     * Ajout de l'enregistrement
+                     */
+                    $this->ajouterEnregistrement($dbconn,$idMandataire);  
+                    /**
+                     * Annulation de la limite
+                     */
+                    $limite = 0;
 
-                $req = "UPDATE session SET limite=".$limite." WHERE nomSession='".$_SESSION['sessionName']."'";
-                $dbconn->query($req);
+                    $req = "UPDATE session SET limite=".$limite." WHERE nomSession='".$_SESSION['sessionName']."'";
+                    $dbconn->query($req);
+                    return $_SESSION['msg'] = true;
+                }
+                else
+                {
+                   return $_SESSION['msg'] = 'LA LIMITE DE BILLETS POUR CETTE OPERATION A ETE ATTEINT';
+                }           
             }
-            else{
-                return 'LA LIMITE DE BILLETS POUR CETTE OPERATION A ETE ATTEINT';
-            }           
+            else
+            {
+                return $_SESSION['msg'] = 'UN ENREGISTREMENT A ETE DETECTE DANS CETTE SESSION PAR LE SYSTEME';
+            }  
         }
-        else{
-            return 'UN ENREGISTREMENT A ETE DETECTE DANS CETTE SESSION PAR LE SYSTEME';
-        } 
+        else
+        {
+            return $_SESSION['msg'] = "ERREUR : VOUS NE POUVEZ PAS ENREGISTRER CE BILLET, CAR CETTE SESSION A ETE DESACTIVE !!!"; 
+
+        }
+        
     }
 
     /** LISTER LES ENREGISTREMENTS D'UNE OPERATION
@@ -279,7 +435,7 @@ class Manager implements Services
      * @var $nomSession(string) : operation en cours
      */
     public function afficherDonnees($dbconn, $nomSession){
-        $req = "SELECT m.idMandataire, m.nomMandataire, m.profession, m.statut, m.matricule, m.dateEmission, b.depart, b.arrive, b.destination, b.createdAt, t.montant, t.paysEmission, t.origineDesFonds,e.idEnregistrement FROM mandataire m, billet b, transaction t, enregistrement e, session s WHERE m.idMandataire = b.idMandataire AND m.idMandataire = t.idMandataire AND m.idMandataire = e.idMandataire AND e.idSession = s.idSession AND s.nomSession ='".$nomSession."'"; 
+        $req = "SELECT m.idMandataire, m.nomMandataire, m.profession, m.statut, m.matricule, m.dateEmission,b.idUtilisateur, b.depart, b.arrive, b.destination, b.createdAt, t.montant, t.paysEmission, t.origineDesFonds,e.idEnregistrement FROM mandataire m, billet b, transaction t, enregistrement e, session s WHERE m.idMandataire = b.idMandataire AND m.idMandataire = t.idMandataire AND m.idMandataire = e.idMandataire AND e.idSession = s.idSession AND s.nomSession ='".$nomSession."'"; 
         //$req = "SELECT m.nomMandataire, m.profession, m.statut FROM mandataire m, session s, enregistrement e WHERE e.idMandataire=m.idMandataire AND s.idSession = e.idSession AND s.nomSession ='".$nomSession."'";
     //echo $_SESSION['loginUser'];
 
@@ -363,7 +519,7 @@ class Utilisateur extends Manager implements User
         }
         else{
 
-            return "Utilisateur inexistant !";
+            return $_SESSION['msg'] = 'ATTENTION : login ou mot de passe incorrecte...Veuillez reéssayer!';
         }
      }
     /**
@@ -374,7 +530,7 @@ class Utilisateur extends Manager implements User
     }
     public function deleteMessage(){
         unset($_SESSION['msg']);
-        return true;
+        return '';
     }
     public function displayMessage(){
         if (isset($_SESSION['msg'])) {
@@ -439,6 +595,7 @@ class Administrator extends Utilisateur implements Administration
      * @return true (bool)
      ***/
     public function ajouterSession($dbconn,$dateDeCreation,$limite,$titre){
+        $statut = 0;
         $nomSession = '' ; $i=1;
         //__selection du nombre de session enregistré
         $req = "SELECT * FROM session";
@@ -453,7 +610,7 @@ class Administrator extends Utilisateur implements Administration
             $find = $dbconn->query($req)->fetch();
             if (empty($find)) {
                 //__requete d'insertion
-                $req = "INSERT INTO session VALUES('','".$nomSession."','".$dateDeCreation."','".$limite."','".$titre."')"; 
+                $req = "INSERT INTO session VALUES('','".$nomSession."','".$dateDeCreation."','".$limite."','".$titre."','".$statut."')"; 
                 $dbconn->query($req); 
             }
          }
@@ -593,48 +750,6 @@ class Administrator extends Utilisateur implements Administration
         $find = $stmt->fetch();
         
         return $find;
-    }
+    } 
 }
-$m = new Administrator;
-//echo $m->ajouterUtilisateur($dbconn, 1, 1);
 
-/*
-    La fonction effectuer enregistrement fonctionne
-*/
- 
-//$exec = $m->effectuerEnregistrement($dbconn,"5","KAMEN","etudiant","RN","2021-05-22","2021-06-22","Italy","belgique","epargne", "2021-07-22");
-//var_dump($exec);
-/*$utilisateur = new Utilisateur;
-
-echo $utilisateur->connexion($dbconn, 'joachimk', 'joachim@k.com');
-$utilisateur->effectuerEnregistrement($dbconn,"5558962","KAMEN","etudiant","RN","2021-05-22","2021-06-22","Italy","belgique","epargne", "2021-07-22");
-*/
-
-
-
-?>
-
-<!--DOCTYPE html>
-<html>
-<head>
-    <title>Registration</title>
-</head>
-<body>
-<form method="POST">
-    <input type="text" name="nomMandataire" placeholder="nomMandataire"></br>
-    <input type="text" name="profession" placeholder="profession"></br>
-    <input type="text" name="statut" placeholder="statut"></br>
-
-    <input type="date" name="depart" placeholder="depart"></br>
-    <input type="date" name="arrive" placeholder="arrive"></br>
-    <input type="text" name="destination" placeholder="destination"></br>
-
-    <input type="text" name="paysEmission" placeholder="paysEmission"></br>
-    <input type="text" name="origineFonds" placeholder="origineFonds"></br>
-
-    <input type="submit" name="sendData"></br> 
-
-
-</form>
-</body>
-</html-->

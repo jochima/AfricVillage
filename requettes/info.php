@@ -1,6 +1,4 @@
-<?php  
-     //session_start();
-//     $bdd=new PDO ('mysql:host=localhost;dbname=ceo;','root','');
+<?php   
      if(isset($_POST['resident']) && isset($_POST['nom']) && isset($_POST['profession'])
                 && isset($_POST['matricule']) && isset($_POST['dateEmission']) && isset($_POST['paysEmission'])
         ){
@@ -14,13 +12,19 @@
                             $_SESSION['resident'] = $_POST['resident'];
                             $_SESSION['matricule'] = strtoupper($_POST['matricule']);
                             $profession = trim($_POST['profession']);
+                            $prix = trim($_POST['prixbillet']);
                             if (empty($profession)) {
                                 $_SESSION['profession'] = "SANS PROFESSION";
                             }
                             else{ 
                                 $_SESSION['profession'] =strtoupper($_POST['profession']);
                             }
-                            $_SESSION['limite'] = 50000;//___montant alloue par defaut
+                            if (empty($prix)) {
+                                $_SESSION['limite'] = 7200;//___montant alloue par defaut
+                            }
+                            else{ 
+                                $_SESSION['limite'] =strtoupper($_POST['prixbillet']);
+                            } 
                             //___billet d'avion
                             $depart = $_SESSION['depart'];
                             $retour = $_SESSION['retour'];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 25 nov. 2021 à 23:45
+-- Généré le :  jeu. 09 déc. 2021 à 17:19
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.2
 
@@ -43,9 +43,9 @@ CREATE TABLE `billet` (
 --
 
 INSERT INTO `billet` (`idBillet`, `idMandataire`, `idUtilisateur`, `depart`, `arrive`, `destination`, `createdAt`) VALUES
-(85, 66, 1, '2021-05-22', '2021-06-22', 'Italy', '2021-11-16'),
-(86, 67, 2, '2021-05-22', '2021-06-22', 'Italy', '2021-11-16'),
-(87, 68, 2, '2021-11-14', '2021-11-12', 'FRANCE', '2021-11-23');
+(92, 73, 19, '2021-11-01', '2021-12-01', 'FRANCE', '2021-11-29'),
+(93, 74, 20, '2021-12-04', '2021-12-03', 'FRANCE', '2021-12-09'),
+(94, 75, 20, '2021-12-14', '2021-12-30', 'FRANCE', '2021-12-09');
 
 -- --------------------------------------------------------
 
@@ -65,9 +65,9 @@ CREATE TABLE `enregistrement` (
 --
 
 INSERT INTO `enregistrement` (`idEnregistrement`, `idUtilisateur`, `idMandataire`, `idSession`) VALUES
-(94, 1, 66, 10),
-(95, 2, 67, 10),
-(96, 2, 68, 10);
+(101, 19, 73, 10),
+(102, 20, 74, 10),
+(103, 20, 75, 10);
 
 -- --------------------------------------------------------
 
@@ -89,9 +89,9 @@ CREATE TABLE `mandataire` (
 --
 
 INSERT INTO `mandataire` (`idMandataire`, `matricule`, `nomMandataire`, `profession`, `statut`, `dateEmission`) VALUES
-(66, '558962', 'KAMEN', 'etudiant', 'RN', '2021-07-22'),
-(67, '5558962', 'KAMEN', 'etudiant', 'RN', '2021-07-22'),
-(68, 'FFFF', 'FFF', 'FFFF', 'R', '2021-11-10');
+(73, 'O', 'O', 'O', 'R', '2020-10-28'),
+(74, 'I', 'OIU', 'SANS PROFESSION', 'R', '2020-11-09'),
+(75, 'FDGFDGFDG', 'DTHFGF', 'FDGFDGFDG', 'R', '2021-12-14');
 
 -- --------------------------------------------------------
 
@@ -104,21 +104,22 @@ CREATE TABLE `session` (
   `nomSession` varchar(50) NOT NULL,
   `createdAt` date NOT NULL,
   `limite` int(11) NOT NULL,
-  `intitule` varchar(100) NOT NULL
+  `intitule` varchar(100) NOT NULL,
+  `statut` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `session`
 --
 
-INSERT INTO `session` (`idSession`, `nomSession`, `createdAt`, `limite`, `intitule`) VALUES
-(10, 'session1', '2021-12-18', 0, 'EcoBanque'),
-(11, 'session3', '2021-11-18', 0, ''),
-(12, 'session2', '2021-11-17', 0, ''),
-(23, 'session14', '2021-11-25', 0, ''),
-(24, 'session5', '2021-11-27', 0, ''),
-(25, 'session6', '2021-12-31', 5, 'eee'),
-(26, 'session7', '2021-11-11', 5, 'zzz');
+INSERT INTO `session` (`idSession`, `nomSession`, `createdAt`, `limite`, `intitule`, `statut`) VALUES
+(10, 'session1', '2021-12-18', 4938465, 'EcoBanque', 1),
+(11, 'session3', '2021-11-18', 0, '', 1),
+(12, 'session2', '2021-11-17', 0, '', 1),
+(23, 'session14', '2021-11-25', 0, '', 0),
+(24, 'session5', '2021-11-27', 0, '', 0),
+(25, 'session6', '2021-12-31', 5, 'eee', 0),
+(26, 'session7', '2021-11-11', 5, 'zzz', 0);
 
 -- --------------------------------------------------------
 
@@ -130,6 +131,7 @@ CREATE TABLE `transaction` (
   `idTransaction` int(11) NOT NULL,
   `idMandataire` int(11) NOT NULL,
   `idUtilisateur` int(11) NOT NULL,
+  `montant` int(11) NOT NULL,
   `paysEmission` varchar(50) NOT NULL,
   `origineDesFonds` varchar(50) NOT NULL,
   `dateEmission` date NOT NULL
@@ -139,10 +141,10 @@ CREATE TABLE `transaction` (
 -- Déchargement des données de la table `transaction`
 --
 
-INSERT INTO `transaction` (`idTransaction`, `idMandataire`, `idUtilisateur`, `paysEmission`, `origineDesFonds`, `dateEmission`) VALUES
-(83, 66, 1, 'belgique', 'epargne', '2021-07-22'),
-(84, 67, 2, 'belgique', 'epargne', '2021-07-22'),
-(85, 68, 2, 'FFFF', 'Epargne', '2021-11-10');
+INSERT INTO `transaction` (`idTransaction`, `idMandataire`, `idUtilisateur`, `montant`, `paysEmission`, `origineDesFonds`, `dateEmission`) VALUES
+(90, 73, 19, 50000, 'O', 'Epargne', '2020-10-28'),
+(91, 74, 20, 5000, 'I', 'Epargne', '2020-11-09'),
+(92, 75, 20, 56535, 'FRANCE', 'Epargne', '2021-12-14');
 
 -- --------------------------------------------------------
 
@@ -164,9 +166,9 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `login`, `motDePasse`, `role`, `createdAt`) VALUES
 (17, 'admin', 'AAA', 'manager', '2021-11-24 09:44:49'),
-(18, 'kingni', 'boris', 'admin', '0000-00-00 00:00:00'),
+(18, 'k', 'k', 'admin', '0000-00-00 00:00:00'),
 (19, 'oumar', 'cisse', 'manager', '2021-11-24 10:01:44'),
-(20, 'r', 'r', 'admin', '2021-11-01 00:00:00');
+(20, 'r', 'r', 'manager', '2021-11-01 00:00:00');
 
 --
 -- Index pour les tables déchargées
@@ -220,19 +222,19 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `billet`
 --
 ALTER TABLE `billet`
-  MODIFY `idBillet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `idBillet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT pour la table `enregistrement`
 --
 ALTER TABLE `enregistrement`
-  MODIFY `idEnregistrement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `idEnregistrement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT pour la table `mandataire`
 --
 ALTER TABLE `mandataire`
-  MODIFY `idMandataire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `idMandataire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT pour la table `session`
@@ -244,7 +246,7 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT pour la table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `idTransaction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `idTransaction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`

@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="../css/tableau.css">
+
     <script lang="javascript" src="../sheetjs/dist/xlsx.full.min.js"></script>
 
     <title>Compilation</title>
 </head>
 <body>
   <?php
-    //require_once '../requettes/fpdf/vendor/autoload.php';
+    
     require_once '../requettes/Class/Manager.php';
-        //session_start();
+    require_once 'complements.php';
+    include('headerBillet.php');
     function content(){
 
   ?>
@@ -39,7 +42,7 @@
         .tg .tg-yw4l{vertical-align:top }
     </style> 
 
-        <table class="tg" id="document">
+        <table class="tg" id="document" style="margin-top:100px;">
           
 <thead>
 <tr style="background-color:#788496">
@@ -75,6 +78,8 @@ $manager = new Manager;
  * Display data
  */
 $dbconn = new PDO('mysql:host=localhost;dbname=ceo','root',''); 
+//$dbconn = new PDO('mysql:host=sql4.freesqldatabase.com;dbname=sql4456673','sql4456673','mpcDhByxfK'); 
+
 $nomSession = $_GET['s'];
 $display = $manager->afficherDonnees($dbconn, $_GET['s']); $vente = 0;
 //var_dump($display);
@@ -137,12 +142,13 @@ if (is_array($display)) {
 ?>
 
 
-            <button onclick="exportToExcel('xlsx','<?= $_SESSION['sessionName']?>')">Export excel file</button>
+            <center><button class="convert" onclick="exportToExcel('xlsx','<?= $_SESSION['sessionName']?>')">Export excel file</button></center>
         
             <script type="text/javascript">
               function exportToExcel(extension, nameFile){
                 var el = document.getElementById("document");
                 var wb = XLSX.utils.table_to_book(el,{sheet:"sheet1"});
+               
                 return XLSX.writeFile(wb,nameFile+"."+extension || ('myFirstSheet.'+(extension||'xlsx')));
               }
             </script>

@@ -18,11 +18,7 @@
     <a href="billetdubai.php">Dubai</a>
     <a href="billetmali.php">Mali</a>
     <a href="billetsenegal.php">Senegal</a>
-    <a href="start.php">Autre session?</a>
-    <form action="" method="POST">
-        <button name="deconnexion" class="deconnexion" type="submit">Deconnexion</button>
-    </form>
-
+    
 
 
   </div>
@@ -41,5 +37,4 @@
           session_unset();
           header('Location:../index.php');
     }
-
 ?>

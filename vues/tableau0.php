@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Suppression</title>
+    <link rel="stylesheet" href="../css/tableau.css">
+    <title>Document</title>
 </head>
 <body>
   <?php
     //require_once '../requettes/fpdf/vendor/autoload.php';
     require_once '../requettes/Class/Manager.php';
+                require_once 'complements.php';
+    
+    include('headerBillet.php');
         //session_start();
     function content(){
-echo $_SESSION['limite'];
+//echo $_SESSION['limite'];
   ?>
     <style type="text/css">
         body{
@@ -119,7 +123,7 @@ foreach ($display as $key => $data) {$key+=1;
           <td class="tgl" colspan="1"><?=$data['paysEmission']?></td>
           <td class="tgl" colspan="1"><?=$data['origineDesFonds']?></td> 
           <td class="tgl" colspan="1"> 
-              <button name="delete" onclick="confirmation<?= $data['idMandataire']?>()">Supprimer</button> 
+              <button class="delete"name="delete" onclick="confirmation<?= $data['idMandataire']?>()">Supprimer</button> 
           </td> 
         </tr>
               <?php
@@ -129,6 +133,7 @@ foreach ($display as $key => $data) {$key+=1;
             </table>
 <?php
   }
+   // include('footer.php')
 
   echo content();
 

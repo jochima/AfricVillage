@@ -17,6 +17,7 @@
 <?php
                 //session_start();
                 require_once '../requettes/Class/Manager.php';
+                require_once 'complements.php';
                 $_SESSION['pays']='AMERIQUE';
                 if (isset($_POST['demarrer'])) {
                     if (!empty($_POST['date_de_session'])) {
@@ -49,7 +50,7 @@
                     $dateEmission=$_SESSION['dateEmission'];
                     $paysEmission =$_SESSION['paysEmission'];
                     $manager = new Manager;
-                    $manager-> effectuerEnregistrement($dbconn,$matricule,$nom_user,$profession,$resident,$depart,$retour,$destination,$paysEmission,$origineFonds,$dateEmission);
+                    $_SESSION['msg'] = $manager-> effectuerEnregistrement($dbconn,$matricule,$nom_user,$profession,$resident,$depart,$retour,$destination,$paysEmission,$origineFonds,$dateEmission);
                     header('Location: billetamerique.php');
                 }
                 
@@ -462,7 +463,7 @@
         
     </div>
     <form method="POST"action="">
-        <input id="impression" name="impression" type="submit" onclick="imprimer_page()" value="Imprimer cette page"/>
+       <input id="impression" name="impression" type="submit" onclick="imprimer_page()" value="Imprimer cette page" <?php if (!isset($_POST['matricule'])){echo 'disabled';}?> />
     </form>
     <div id="fbl">
         <?php
@@ -474,6 +475,21 @@
         function imprimer_page(){
             window.print();
         }
+
+        <?php
+if (isset($_SESSION['msg']) && !empty($_SESSION['msg']) && is_string($_SESSION['msg'])) {
+    ?>
+    alert('<?= $_SESSION['msg']?>');
+    <?php 
+    unset($_SESSION['msg']);   
+}
+elseif(isset($_SESSION['msg']) && $_SESSION['msg'] == true){
+    ?>
+    alert('ENREGISTREMENT REUSSI');
+    <?php 
+    unset($_SESSION['msg']); 
+}
+?>
     </script>
 
 

@@ -1,0 +1,21 @@
+.tg{
+    margin-top: 100px;
+}
+.delete{
+    background-color: red;
+    border: 1px solid red;
+    color:white;
+    border-radius: 5px;
+    height: 30px;
+}
+.convert{
+    padding:10px;
+    border:1px solid #344BAB;
+    background-color: #344BAB;
+    color:white;
+    border-radius: 5px;
+
+}
+.but-exporter{
+    text-align: center;
+}

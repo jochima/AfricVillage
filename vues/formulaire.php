@@ -4,23 +4,26 @@
         <link rel="stylesheet" href="../css/formulaire.css">
         
 
-
+        <title>Formulaire Date</title>
                                 <?php 
-                                        include("header.php");
+  include("header.php");
+  include('../requettes/ValidationDate.php');
+
+ // include('../requettes/ValidationDate.php');
                                     
               ?>
 <div class="data">
                                             
-                        <h1 class="title_lancement">Lancement de la création des billets</h1>
             <div class="conteiner">
                                             
                                             <div class="conteiner_items">
 
                                             </div>
                                 <div class="conteiner_items">
-                                    <?php include('../requettes/SenDate.php');
-              ?>
+              
                                             <div class="conteiner_input">
+                                            <h4 class="title_lancement">Lancement de la création des billets</h4>
+                                            <h4 class="error_dates"><?= $error_Date; ?></h4>
 
                                             <form action="" method="POST">
                                                 <div class="conteiner_data_input">
@@ -93,5 +96,5 @@
 
 <?php
 
-                                    include('footer.php');
+                                  include('footer.php');
 ?>

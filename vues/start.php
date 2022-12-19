@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CeeMo </title>
+    <title>Choix de la session </title>
     <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../index.css">
     <!-- Bulma Version 0.9.0-->
@@ -128,7 +128,7 @@
                                                 <label for="choix">CHOISIR UNE SESSION</label><br>
                                                 <select name="session_selectionne" id="choisirSession" style="width: 50%;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;" >
                                                     <?php
-                                                        $req = 'SELECT * FROM session';
+                                                        $req = 'SELECT * FROM session WHERE statut=1';
                                                         $stmt = $dbconn->query($req);
                                                         $find = $stmt->fetchAll();
                                                         foreach ($find as $row) {
@@ -142,7 +142,7 @@
                                             
                                             <div class="demarrer" style="margin-top:20px; ">
                                             <a href="vues/formulaire.php" >
-                                                <input type="submit" name="demarrer" value="demarrer" style="background-color: #4CAF50;border: none;color: white;padding: 16px 32px; text-decoration: none; margin: 4px 2px;cursor: pointer;">
+                                                <input type="submit" name="demarrer" value="demarrer" style="background-color: #344BAB;border: none;color: white;padding: 16px 32px; text-decoration: none; margin: 4px 2px;cursor: pointer;">
                                                 </a>
                                             </div>
                                     </form>

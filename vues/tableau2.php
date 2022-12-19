@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <script lang="javascript" src="../sheetjs/dist/xlsx.full.min.js"></script>
-
     <title>Document</title>
 </head>
 <body>
@@ -755,15 +753,6 @@ $mpdf->Output();
                 <button name="genererPdf" style="background-color: blue; height: 50px; color: white; margin-left: 40em; margin-top: 100px; cursor: pointer; font-family: poppins;" onclick="/*window.print()*/">IMPRIMER OU ENREGISTRER</button>
               </form>
             </div>
-            <button onclick="exportToExcel('xlsx','myFirstSheet')">Export excel file</button>
         
-            <script type="text/javascript">
-              function exportToExcel(extension, nameFile){
-                var el = document.getElementById("document");
-                var wb = XLSX.utils.table_to_book(el,{sheet:"sheet1"});
-                return XLSX.writeFile(wb,nameFile+"."+extension || ('myFirstSheet.'+(extension||'xlsx')));
-              }
-            </script>
-
 </body>
 </html>

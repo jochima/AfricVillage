@@ -42,6 +42,27 @@ table {
         border:#04AA6D;
 
 
+
+  }
+  .modifier:hover{
+    transition:  ease 0.5s;
+    background-color: #04AA6D;  
+    border:#04AA6D;
+  }
+  .voirTableau{
+    background-color: #04AA6D;  
+    border:#04AA6D;
+    color:white;
+    padding: 5px;
+    border-radius:5px;
+    width: 90px;
+  }
+  .voirTableau:hover{
+    background-color: #344BAB;
+    border:1px solid #344BAB;
+    transition:  ease 0.5s;
+    
+
   }
   .modifier{
     background-color: #344BAB;

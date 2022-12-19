@@ -2,14 +2,15 @@
 <div class="container">
                 
                 <div class="container_items">
-                <?php
+                <?php 
                     $db = new PDO('mysql:host=localhost; dbname=ceo','root','');
                     $req = 'SELECT * FROM session WHERE nomSession="'.$_SESSION['sessionName'].'"';
                     $stmt = $db->query($req);
                     $data = $stmt->fetch();
+                               
                 ?>
                             <ul>
-                                        <li class="item_session">Ceo</li>
+                                        <li class="item_session">NCK</li>
                                         <li class="item_session items2">{ <?=$data['intitule']?> } :</li>
                                         <li class="item_session items2"> [<?= $data['limite']?>]</li>
                             </ul>
@@ -19,7 +20,7 @@
 
                         <div class="items" style="margin-top:20px; font-family:poppins; color:white;">
                       
-                                       powered by slabtech
+                                       NCK by slabtech
 
                         </div>
 
@@ -32,12 +33,22 @@
                                             <input type="text" class="suivi" value="" id="in" placeholder="Entrer le nom et le prenom"> -->
 
                             </div>
+                            <div class="items">
+                                    <?php 
+                                     include ("dropdown2.php");
+                                       
+                                     ?>
+                                            <!-- <label for="suivi" style=" font-family: poppins; color: white;">Nom et prenom</label>
+                                            <input type="text" class="suivi" value="" id="in" placeholder="Entrer le nom et le prenom"> -->
+
+                            </div>
+                            
+                            
                             
                             <div class="items">
 
 
-                                      <a href="tableau0.php?s=<?=$_SESSION['sessionName']?>"  target="_blank"> <button class="tableau">Supprimer un enregistrement</button></a>
-                                      <a href="tableau.php?s=<?=$_SESSION['sessionName']?>"  target="_blank"> <button class="tableau">Acceder au tableau</button></a>
+                                      <a href="tableau.php?s=<?=$_SESSION['sessionName']?>" target="_blank"> <button class="tableau">Acceder au tableau</button></a> 
                             </div>
                 
                 </div>

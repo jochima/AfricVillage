@@ -1,6 +1,25 @@
+
+body{
+    font-family: poppins;
+}
 .navbar{
     background-color:#344BAB;
     position: fixed;
     width: 100%;
     top:0;
+    height: 70px;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+.items{
+    margin-right: 45px;
+}
+.name_logiciel{
+    list-style: none;
+    color: WHITE;
+    margin-left:15px;
+    
+
 }

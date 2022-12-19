@@ -42,7 +42,7 @@ if (isset($_POST['creerSession'])) {
                                                 <label class="label" for="nomsession"><b>Nom session</b></label><br>
                                                 <input type="text" placeholder="Entrer le nom de la session" name="nomSession" id="email" required><br>
                                                 <label class="label" for="cotar"><b>Cotar de la session</b></label><br>
-                                                <input type="text" placeholder="Entrer le cotar " name="quota" id="psw" required><br>
+                                                <input type="number" placeholder="Entrer le cotar " name="quota" id="psw" required><br>
                                                 <label class="label" for="datessesion"><b>Date de la session</b></label><br>
                                                 <input type="date" name="dateSession" id="psw" required><br>
 

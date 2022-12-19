@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <script lang="javascript" src="../sheetjs/dist/xlsx.full.min.js"></script>
     <title>Document</title>
 </head>
 <body>
   <?php
     //require_once '../requettes/fpdf/vendor/autoload.php';
     require_once '../requettes/Class/Manager.php';
-        //session_start();
+                require_once 'complements.php'; 
     function content(){
 
   ?>
@@ -135,102 +134,6 @@ $mpdf->Output();
                 <button name="" style="background-color: blue; height: 50px; color: white; margin-left: 40em; margin-top: 100px; cursor: pointer; font-family: poppins;" onclick="window.print()">IMPRIMER OU ENREGISTRER</button>
               </form>
             </div>
-
-<script>
-
-function prepareTable() {
-  var str = "",
-    header = "",
-    graphImg;
-  
-  
-  header = '\uFEFF<h2 style="text-align:center;">Google</h2>';
-  
-  str = '<table border="1">'
-    +'<tr><td style="text-align:center" colspan="6">Yahoo</td></tr>'
-    +'<tr><td style="font-weight:bold" colspan="6">(2017.03.20)</td></tr>'
-    +'<thead>'
-    +'    <tr style="background-color:#788496; color: #ffffff">'
-    +'      <th scope="col" rowspan="2">'
-    +'        <div>Yahoo</div>'
-    +'      </th>'
-    +'      <th scope="col">'
-    +'        <div class="tar">Yahoo(2017-01)</div>'
-    +'      </th>'
-    +'      <th scope="col" colspan="2">'
-    +'        <div class="tar">Yahoo(2016-12)</div>'
-    +'      </th>'
-    +'      <th scope="col" colspan="2">'
-    +'        <div class="tar">Yahoo(2016-12)</div>'
-    +'      </th>'
-    +'    </tr>'
-    +'    <tr style="background-color:#788496; color: #ffffff">'
-    +'      <th height="40" align="right">'
-    +'        <div>Yahoo</div>'
-    +'      </th>'
-    +'      <th align="right">'
-    +'        <div>Yahoo</div>'
-    +'      </th>'
-    +'      <th align="right">'
-    +'        <div>Yahoo</div>'
-    +'      </th>'
-    +'      <th align="right">'
-    +'        <div>Yahoo</div>'
-    +'      </th>'
-    +'      <th align="right">'
-    +'        <div>Yahoo</div>'
-    +'      </th>'
-    +'    </tr>'
-    +'</thead>'
-    +'  <tbody>'
-    
-    +'    <tr style="text-align: right">'
-    +'      <td style="padding:0 20px 0 0">'
-    +'        <div>NAME</div>'
-    +'      </td>'
-    +'      <td style="width: 150px;">'
-    +'        <div>311,210</div>'
-    +'      </td>'
-    +'      <td style="width: 150px;">'
-    +'        <div>311,210</div>'
-    +'      </td>'
-    +'      <td style="width: 150px;">'
-    +'        <div>311,210%</div>'
-    +'      </td>'
-    +'      <td style="width: 150px;">'
-    +'        <div>311,210</div>'
-    +'      </td>'
-    +'      <td style="width: 150px;">'
-    +'        <div>311,210%</div>'
-    +'      </td>'
-    +'    </tr>';
-    +'  </tbody>'
-    +'</table>';
         
-    return header + str;
-}
-
-
-function doExcel1 () {
-  var blob,
-    template = prepareTable();
-
-  blob = new Blob([template], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-  });
-  
-  saveAs(blob, "tests.xls");
-}
-</script>
-<a href="javascript:" class="btn_style1 excel" onclick="doExcel1()"><span>Excel</span></a>
-
-
-
-
-
-
-
-
-      
 </body>
 </html>
